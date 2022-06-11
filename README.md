@@ -1,4 +1,4 @@
-# terminal
+# Terminal
 
 Absurd games ©2022
 started: 9/06/2022
