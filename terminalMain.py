@@ -25,6 +25,12 @@ while count <= 50:
     print ()
     count += 1
     
+credits = """
+>>>Code: Paul Cannon Palacios
+    Help: (from internet), Thanks to stack overflow and GeeksForGeeks!
+    ASCII art web: https://www.coolgenerator.com/ascii-text-generator
+"""
+
 title="""
 ████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗ ██╗         ██████╗ ███████╗████████╗ █████╗ 
 ╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗██║         ██╔══██╗██╔════╝╚══██╔══╝██╔══██╗
@@ -40,9 +46,9 @@ print (Fore.WHITE + "Info:")
 print ("    Help(), Copyright(), credits(), nextUpdatePlan()")
 print ()
 
-print (colorStyle)        
+print (colorStyle)
 
-pin = ""
+pin = "[No pinned message]"
 
 def program():
     global count
@@ -51,6 +57,7 @@ def program():
     global url, httpsWWW
     global timeSec
     global colorStyle
+    global historyAnswer
     
     count = 0
 
@@ -88,6 +95,8 @@ def program():
     yourIP = socket.gethostbyname(hostName)
 
     pin = ""
+    
+    historyAnswer = ""
 
     platformVersion = platform.version()
     platformSystem = platform.system()
@@ -188,6 +197,14 @@ def program():
             
 
         print ("\n>>>This is how it looks: ██")
+        
+    elif "https://www." in answer:
+        print ("Opening", answer,"...")
+        webbrowser.open(answer) 
+        print ("Done!")
+        
+    elif answer == "echo pin" or answer == "pin":
+        print ("📌PINED ECHO: ", pin)
         
     elif answer == "get ip":
         print (">>>Your host name is:")
@@ -319,7 +336,7 @@ def program():
                 
     elif answer == "set; echo.pin":
         pin = input(">>> #clear to clear pin or type something to pin ")
-        
+
         print (">>> Pin set to ", pin)
                 
         if pin == "#clear":
@@ -351,7 +368,7 @@ def program():
         quit()
 
     elif answer == "credits()":
-        print (">>> By Paul Cannon Palacios")
+        print (credits)
 
     elif answer == "copyright()":
         print (">>> Absurd games ©2022")
@@ -616,11 +633,21 @@ def program():
             print (colorStyle)
 
 def updatePin():
-    if pin != "":
-        print ("📌PINED ECHO: ", pin)
+    if pin != "[No pinned message]":
+        print ("You have a pinned message!")
+
+def history():
+    global historyAnswer
+    
+    if pygame.key.get_pressed()[pygame.K_UP]:
+        answer = input(">>>", historyAnswer)
+    
+    if pygame.key.get_pressed()[pygame.K_DOWN]:
+        answer = input(">>>")
     
 while True:
     print (colorStyle)
     
     updatePin()
     program()
+    history()
