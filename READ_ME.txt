@@ -1,6 +1,6 @@
 # terminal
 
-Absurd games ©2022")
+Absurd games ©2022
 started: 9/06/2022
 Beta: 11/06/2022
 Release: Comming soon...
